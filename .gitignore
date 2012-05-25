@@ -1,3 +1,7 @@
+# Idea build output #
+out
+
+# Compiled class files#
 *.class
 
 # Package Files #
