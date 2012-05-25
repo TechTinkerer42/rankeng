@@ -1,6 +1,11 @@
-# Idea build output #
+# IDEA #
+# Project file with local settings #
+*.iws
+
+# Build output #
 out
 
+# JAVA #
 # Compiled class files#
 *.class
 
