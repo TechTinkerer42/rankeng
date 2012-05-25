@@ -1,9 +1,9 @@
 package ru.compscicenter.ml.ranking.trees;
 
+import org.apache.log4j.Logger;
 import ru.compscicenter.ml.ranking.data.DataSet;
-import ru.compscicenter.ml.ranking.evaluation.EvaluationTool;
+import ru.compscicenter.ml.ranking.utils.CommonUtils;
 import ru.compscicenter.ml.ranking.utils.Pair;
-import ru.compscicenter.ml.ranking.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,9 @@ import java.util.Random;
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
  * Date:   19.04.12
  */
-public class AdditiveTreesLearner {
+public class GradientBoostedTreesLearner {
+
+    private static Logger logger = Logger.getLogger(GradientBoostedTreesLearner.class);
 
     private static final int GAMMA_STEP_NUMBER = 100;
     private static final double GAMMA_START_VALUE = 1.0;
@@ -58,7 +60,7 @@ public class AdditiveTreesLearner {
 
             // gamma (see http://en.wikipedia.org/wiki/Gradient_boosting)
             double gamma = calculateGamma(dataSets.first(), w, predictions, newTree);
-            System.out.println("gamma=" + gamma);
+            logger.debug("gamma=" + gamma);
 
             // TODO: refactor - don't use model implicitly
             model.treeEnsemble.add(newTree);
@@ -66,10 +68,6 @@ public class AdditiveTreesLearner {
 
             for (int index = 0; index < dataSet.numberOfRows(); index++) {
                 predictions[index] += gamma * shrinkage * newTree.predict(dataSet.getRow(index));
-            }
-            if (stepCounter % 50 == 0) {
-                EvaluationTool.evaluate("step " + stepCounter + ": ", predictions, dataSets.first());
-//                System.out.println("L=" + Utils.calculateL(w, dataSets.first(), predictions));
             }
         }
     }
@@ -101,7 +99,7 @@ public class AdditiveTreesLearner {
     }
 
     private AdditiveTrees learnInitialModel(DataSet dataSet) {
-        Map<Double, Double> labelDistribution = Utils.averageDCGPerLabel(dataSet);
+        Map<Double, Double> labelDistribution = CommonUtils.averageDCGPerLabel(dataSet);
 
         List<Double> treeWeights = new ArrayList<>();
         List<RegressionTree> treeEnsemble = new ArrayList<>();

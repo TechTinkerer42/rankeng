@@ -1,5 +1,6 @@
 package ru.compscicenter.ranking.imat2009;
 
+import ru.compscicenter.ml.ranking.data.DataProvider;
 import ru.compscicenter.ml.ranking.data.DataSet;
 
 import java.io.BufferedReader;
@@ -11,9 +12,16 @@ import java.util.*;
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
  * Date:   24.04.12
  */
-public class DataLoader {
+public class IMat2009DataProvider implements DataProvider {
 
-    public DataSet load(String inputFile) throws IOException {
+    private final String inputFile;
+
+    public IMat2009DataProvider(String inputFile) {
+        this.inputFile = inputFile;
+    }
+
+    @Override
+    public DataSet loadData() throws IOException {
         List<List<Double>> valuesList = new ArrayList<>();
         List<Double> relevance = new ArrayList<>();
         List<Integer> queries = new ArrayList<>();

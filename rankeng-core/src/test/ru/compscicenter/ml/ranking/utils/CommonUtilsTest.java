@@ -9,7 +9,7 @@ import java.util.List;
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
  * Date:   19.04.12
  */
-public class UtilsTest {
+public class CommonUtilsTest {
 
     @Test
     public void testSort(){
@@ -22,7 +22,7 @@ public class UtilsTest {
 
         double[] p = new double[] {1, 2, 3, 4, 5};
 
-        List<Integer> sortedList = Utils.sortByPredictions(list, p);
+        List<Integer> sortedList = CommonUtils.sortByPredictions(list, p);
         System.out.println(sortedList.get(0));
         System.out.println(sortedList.get(1));
         System.out.println(sortedList.get(2));

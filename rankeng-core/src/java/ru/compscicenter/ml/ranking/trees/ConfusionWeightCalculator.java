@@ -1,7 +1,7 @@
 package ru.compscicenter.ml.ranking.trees;
 
 import ru.compscicenter.ml.ranking.data.DataSet;
-import ru.compscicenter.ml.ranking.utils.Utils;
+import ru.compscicenter.ml.ranking.utils.CommonUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +41,7 @@ public class ConfusionWeightCalculator implements WeightCalculator {
 
     @Override
     public double[][][] calculateWeights(DataSet dataSet) {
-        Map<Double, Double> labelsProbabilities = Utils.averageDCGPerLabel(dataSet);
+        Map<Double, Double> labelsProbabilities = CommonUtils.averageDCGPerLabel(dataSet);
         Map<Double, Map<Double, Double>> probabilities = new HashMap<>();
         for (Map.Entry<Double, Double> entry1 : labelsProbabilities.entrySet()) {
             Map<Double, Double> cp = new HashMap<>();

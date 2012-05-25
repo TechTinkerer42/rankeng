@@ -2,11 +2,13 @@ package ru.compscicenter.ml.ranking.trees;
 
 import ru.compscicenter.ml.ranking.data.FeatureRow;
 
+import java.io.Serializable;
+
 /**
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
  * Date:   23.04.12
  */
-public class RegressionTree {
+public class RegressionTree implements Serializable {
 
     private final RegressionNode root;
 
@@ -37,6 +39,10 @@ public class RegressionTree {
         return current.value();
     }
 
+    public RegressionNode getRoot() {
+        return root;
+    }
+
     public static class RegressionNode {
 
         private final double value;
@@ -63,6 +69,14 @@ public class RegressionTree {
 
         public boolean isLeaf() {
             return lessOrEqual == null;
+        }
+
+        public int splitIndex() {
+            return splitIndex;
+        }
+
+        public double splitValue() {
+            return splitValue;
         }
 
         public RegressionNode lessOrEqualNode() {

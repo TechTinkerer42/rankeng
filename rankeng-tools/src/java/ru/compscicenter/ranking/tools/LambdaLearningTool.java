@@ -2,9 +2,9 @@ package ru.compscicenter.ranking.tools;
 
 import ru.compscicenter.ml.ranking.data.DataSet;
 import ru.compscicenter.ml.ranking.data.FeatureRow;
-import ru.compscicenter.ml.ranking.evaluation.EvaluationTool;
+import ru.compscicenter.ml.ranking.evaluation.EvaluationLogger;
 import ru.compscicenter.ml.ranking.trees.AdditiveTrees;
-import ru.compscicenter.ml.ranking.trees.AdditiveTreesLearner;
+import ru.compscicenter.ml.ranking.trees.GradientBoostedTreesLearner;
 
 /**
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
@@ -21,14 +21,16 @@ public class LambdaLearningTool implements LearningTool {
 
     @Override
     public void learn(DataSet learningSet, int stepNumber) {
-        AdditiveTreesLearner treesLearner = new AdditiveTreesLearner();
+        GradientBoostedTreesLearner treesLearner = new GradientBoostedTreesLearner();
         treesLearner.setMinNumPerLeaf(10);
         treesLearner.setSampleRatio(0.5);
         treesLearner.setShrinkage(0.1);
         treesLearner.setMaxDepth(4);
 
         model = treesLearner.learn(learningSet, stepNumber);
-        EvaluationTool.evaluate("Final model (learning): ", model, learningSet);
+
+        EvaluationLogger evaluationLogger = new EvaluationLogger(learningSet);
+        evaluationLogger.evaluate("Final model (learning): ", model);
     }
 
     @Override

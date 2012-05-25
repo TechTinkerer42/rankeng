@@ -11,9 +11,9 @@ import java.util.Map;
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
  * Date:   19.04.12
  */
-public class Utils {
+public class CommonUtils {
 
-    private Utils() {
+    private CommonUtils() {
         // Do nothing
     }
 
@@ -40,27 +40,6 @@ public class Utils {
             }
         }
         return sum / size;
-    }
-
-    public static double calculateL(double[][][] w, DataSet dataSet, double[] predictions) {
-        double sum = 0.0;
-        double size = 0;
-        int queryIndex = 0;
-        for (List<Integer> query : dataSet.queries()) {
-            for (int i = 0; i < query.size(); i++) {
-                for (int j = 0; j < query.size(); j++) {
-                    double exi = Math.exp(predictions[query.get(i)]);
-                    double exj = Math.exp(predictions[query.get(j)]);
-                    sum += w[queryIndex][i][j] * Math.log(exi / (exi + exj));
-                }
-            }
-            if (!query.isEmpty()) {
-                size++;
-            }
-            queryIndex++;
-        }
-        return -sum;
-//        return -sum / size;
     }
 
     public static Map<Double, Double> averageDCGPerLabel(DataSet dataSet) {

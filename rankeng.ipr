@@ -30,6 +30,33 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="InspectionProjectProfileManager">
+    <profiles>
+      <profile version="1.0" is_locked="false">
+        <option name="myName" value="Project Default" />
+        <option name="myLocal" value="false" />
+        <inspection_tool class="ClassWithMultipleLoggers" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="loggerNamesString" value="java.util.logging.Logger,org.slf4j.Logger,org.apache.commons.logging.Log,org.apache.log4j.Logger" />
+        </inspection_tool>
+        <inspection_tool class="LogStatementGuardedByLogCondition" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="loggerClassName" value="java.util.logging.Logger" />
+          <option name="loggerMethodAndconditionMethodNames" value="fine,isLoggable(java.util.logging.Level.FINE),finer,isLoggable(java.util.logging.Level.FINER),finest,isLoggable(java.util.logging.Level.FINEST)" />
+        </inspection_tool>
+        <inspection_tool class="LoggerInitializedWithForeignClass" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="loggerClassName" value="org.apache.log4j.Logger" />
+          <option name="loggerFactoryMethodName" value="getLogger" />
+        </inspection_tool>
+        <inspection_tool class="LoggingConditionDisagreesWithLogStatement" enabled="true" level="WARNING" enabled_by_default="true" />
+        <inspection_tool class="NonStaticFinalLogger" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="loggerClassName" value="java.util.logging.Logger" />
+        </inspection_tool>
+        <inspection_tool class="SystemOutErr" enabled="true" level="WARNING" enabled_by_default="true" />
+      </profile>
+    </profiles>
+    <option name="PROJECT_PROFILE" value="Project Default" />
+    <option name="USE_PROJECT_PROFILE" value="true" />
+    <version value="1.0" />
+  </component>
   <component name="Palette2">
     <group name="Swing">
       <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
@@ -164,6 +191,9 @@
       <module fileurl="file://$PROJECT_DIR$/rankeng-core/rankeng-core.iml" filepath="$PROJECT_DIR$/rankeng-core/rankeng-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/rankeng-tools/rankeng-tools.iml" filepath="$PROJECT_DIR$/rankeng-tools/rankeng-tools.iml" />
     </modules>
+  </component>
+  <component name="ProjectResources">
+    <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

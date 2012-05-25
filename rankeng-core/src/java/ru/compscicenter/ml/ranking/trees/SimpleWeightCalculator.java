@@ -1,7 +1,7 @@
 package ru.compscicenter.ml.ranking.trees;
 
 import ru.compscicenter.ml.ranking.data.DataSet;
-import ru.compscicenter.ml.ranking.utils.Utils;
+import ru.compscicenter.ml.ranking.utils.CommonUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +14,7 @@ public class SimpleWeightCalculator implements WeightCalculator {
 
     @Override
     public double[][][] calculateWeights(DataSet dataSet) {
-        Map<Double, Double> labelsProbabilities = Utils.averageDCGPerLabel(dataSet);
+        Map<Double, Double> labelsProbabilities = CommonUtils.averageDCGPerLabel(dataSet);
         double[][][] w = new double[dataSet.queries().size()][0][0];
         int queryIndex = 0;
         for (List<Integer> query : dataSet.queries()) {
