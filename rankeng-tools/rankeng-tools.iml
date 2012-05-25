@@ -10,6 +10,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="rankeng-core" />
+    <orderEntry type="library" name="junit-4.11" level="project" />
+    <orderEntry type="library" name="log4j-1.2.16" level="project" />
   </component>
 </module>
 

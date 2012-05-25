@@ -4,7 +4,7 @@ import ru.compscicenter.ranking.imat2009.DataLoader;
 import ru.compscicenter.ml.ranking.data.DataSet;
 
 /**
- * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
+ * Author: Vasiliy Khomutov - vasiliy.khomutov@gmail.com
  * Date:   24.04.12
  */
 public class Main {
