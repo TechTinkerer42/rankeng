@@ -1,4 +1,4 @@
-package ru.compscicenter.ml.ranking.tools;
+package ru.compscicenter.ml.ranking.evaluation;
 
 import ru.compscicenter.ml.ranking.data.DataSet;
 import ru.compscicenter.ml.ranking.data.FeatureRow;

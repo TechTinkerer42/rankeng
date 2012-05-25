@@ -1,9 +1,8 @@
-package ru.compscicenter.ml.ranking.tools;
+package ru.compscicenter.ranking.imat2009;
 
 import ru.compscicenter.ml.ranking.data.DataSet;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;

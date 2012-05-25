@@ -1,7 +1,7 @@
 package ru.compscicenter.ml.ranking.trees;
 
 import ru.compscicenter.ml.ranking.data.DataSet;
-import ru.compscicenter.ml.ranking.tools.EvaluationTool;
+import ru.compscicenter.ml.ranking.evaluation.EvaluationTool;
 import ru.compscicenter.ml.ranking.utils.Pair;
 import ru.compscicenter.ml.ranking.utils.Utils;
 

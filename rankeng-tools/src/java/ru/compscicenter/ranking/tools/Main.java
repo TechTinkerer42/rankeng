@@ -1,12 +1,7 @@
-package ru.compscicenter.ml.ranking.tools;
+package ru.compscicenter.ranking.tools;
 
+import ru.compscicenter.ranking.imat2009.DataLoader;
 import ru.compscicenter.ml.ranking.data.DataSet;
-import ru.compscicenter.ml.ranking.data.FeatureRow;
-import ru.compscicenter.ml.ranking.trees.AdditiveTrees;
-import ru.compscicenter.ml.ranking.trees.AdditiveTreesLearner;
-import ru.compscicenter.ml.ranking.utils.Pair;
-
-import java.io.*;
 
 /**
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
@@ -14,7 +9,7 @@ import java.io.*;
  */
 public class Main {
 
-    private static final String packageName = "ru.compscicenter.ml.ranking.tools";
+    private static final String packageName = "ru.compscicenter.ranking.tools";
 
     public static void main(String[] args) throws Exception {
         int stepNumber = Integer.parseInt(args[1]);
