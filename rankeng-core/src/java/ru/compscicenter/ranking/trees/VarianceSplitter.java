@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class VarianceSplitter implements Splitter {
 
-    private int minPerLeaf = 20; // deprecated
+    private int minPerLeaf = 20; // will be deprecated
 
     public void setMinPerLeaf(int minPerLeaf) {
         this.minPerLeaf = minPerLeaf;
@@ -106,7 +106,7 @@ public class VarianceSplitter implements Splitter {
         return indexedValues;
     }
 
-    public static class VarianceAggregator {
+    private static class VarianceAggregator {
         private double sumW = 0.0;
         private double sumWR = 0.0;
         private double sumWRR = 0.0;
@@ -124,9 +124,12 @@ public class VarianceSplitter implements Splitter {
                 double newSumWR = w * r + sumWR;
                 double newSumWRR = w * r * r + sumWRR;
 
-                double nominator = w * r * r * newSumW * newSumW + sumWRR * (w * w + 2 * w * sumW)
+                double nominator = w * r * r * newSumW * newSumW
+                        + sumWRR * (w * w + 2 * w * sumW)
                         + s * sumW * sumW
-                        - (2 * sumW - N) * (w * w * r * r + 2 * w * r * sumWR) + (1 - 2 * w) * newSumWR * newSumWR;
+                        - (2 * sumW - N) * (w * w * r * r + 2 * w * r * sumWR)
+                        + (1 - 2 * w) * newSumWR * newSumWR;
+
                 s = nominator / (newSumW * newSumW);
 
                 // Update
