@@ -2,27 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f56bfb2e-0c9b-4db3-a3b4-96b3bb1bd36f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/data/DataProvider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/evaluation/EvaluationLogger.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/model/TargetFunction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/script/log4j.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/data/TestDataProvider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/trees/GradientBoostedTreesLearnerTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-tools/src/config/model.properties" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/evaluation/EvaluationTool.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/trees/AdditiveTreesLearnerTest.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/AdditiveTreesLearner.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/GradientBoostedTreesLearner.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/utils/Utils.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/utils/CommonUtils.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/utils/UtilsTest.java" afterPath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/utils/CommonUtilsTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/DataLoader.java" afterPath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/IMat2009DataProvider.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/tools/Main.java" afterPath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rankeng-core/rankeng-core.iml" afterPath="$PROJECT_DIR$/rankeng-core/rankeng-core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/ConfusionWeightCalculator.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/ConfusionWeightCalculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/RegressionTree.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/RegressionTree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/SimpleWeightCalculator.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/SimpleWeightCalculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/tools/LambdaConfusionLearningTool.java" afterPath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/tools/LambdaConfusionLearningTool.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/LambdaRankTarget.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/RegressionModel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/RegressionModelTrainer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/Target.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/data/WeightCalculator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/ensembles/Ensemble.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/ensembles/EnsembleTrainer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/ensembles/GradientBoosting.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/ensembles/GradientDescent.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/Estimator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/LambdaRankEstimator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/utils/Evaluator.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/evaluation/EvaluationLogger.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/AdditiveTrees.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/ConfusionWeightCalculator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/Estimator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/GradientBoostedTreesLearner.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/LambdaRankEstimator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/SimpleWeightCalculator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/WeightCalculator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/utils/CommonUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/utils/CommonUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/tools/LambdaConfusionLearningTool.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/data/DataProvider.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/data/DataProvider.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/data/DataSet.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/data/DataSet.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/data/FeatureRow.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/data/FeatureRow.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/model/TargetFunction.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/data/RichData.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/RegressionTree.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/RegressionTree.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/RegressionTreeLearner.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/RegressionTreeTrainer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/Splitter.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/Splitter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/VarianceSplitter.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/VarianceSplitter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/utils/Pair.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/utils/Pair.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/utils/PairUtils.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/utils/PairUtils.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/utils/ProbabilityUtils.java" afterPath="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/utils/ProbabilityUtils.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/data/TestDataProvider.java" afterPath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ranking/data/TestDataProvider.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/trees/GradientBoostedTreesLearnerTest.java" afterPath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ranking/ensembles/GradientBoostingTest.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/trees/RegressionTreeLearnerTest.java" afterPath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ranking/trees/RegressionTreeTrainerTest.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/trees/SplitterTest.java" afterPath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ranking/trees/SplitterTest.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/utils/PairUtilsTest.java" afterPath="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ranking/utils/PairUtilsTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/IMat2009DataProvider.java" afterPath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/IMat2009DataProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/Main.java" afterPath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/tools/LambdaLearningTool.java" afterPath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/tools/LambdaLearningTool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rankeng.ipr" afterPath="$PROJECT_DIR$/rankeng.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/tools/LearningTool.java" afterPath="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/tools/LearningTool.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rankeng.iws" afterPath="$PROJECT_DIR$/rankeng.iws" />
     </list>
     <ignored path="rankeng.iws" />
@@ -80,19 +102,7 @@
     <favorites_list name="rankeng" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="TestDataProvider.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/data/TestDataProvider.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="5" selection-start="497" selection-end="497" vertical-scroll-proportion="0.02617801">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -105,22 +115,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
+        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/VarianceSplitter.java" />
         <option value="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/tools/LambdaLearningTool.java" />
-        <option value="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/tools/LambdaConfusionLearningTool.java" />
-        <option value="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/DataLoader.java" />
-        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/data/DataProvider.java" />
-        <option value="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/Imat2009DataProvider.java" />
-        <option value="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/IMat2009DataProvider.java" />
-        <option value="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/Main.java" />
-        <option value="$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/TestDataGenerator.java" />
-        <option value="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/trees/RegressionTreeLearnerTest.java" />
-        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/utils/CommonUtils.java" />
-        <option value="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/trees/AdditiveTreesLearnerTest.java" />
-        <option value="$PROJECT_DIR$/rankeng-core/src/script/log4j.xml" />
-        <option value="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/data/TestDataProvider.java" />
-        <option value="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/data/TestDataGenerator.java" />
-        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/RegressionTree.java" />
-        <option value="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/trees/GradientBoostedTreesLearnerTest.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/data/WeightCalculator.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/data/Instance.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/Target.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/RankingModel.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/RankingModelTrainer.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/RegressionModelTrainer.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/ensembles/GradientBoosting.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/Estimator.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/LambdaRankEstimator.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/RegressionTreeTrainer.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ranking/trees/RegressionTreeTrainerTest.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/Target.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/LambdaRankTarget.java" />
+        <option value="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ranking/ensembles/GradientBoostingTest.java" />
       </list>
     </option>
   </component>
@@ -184,36 +194,18 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
+      <pane id="PackagesPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="rankeng" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="log4j-1.2.16" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="log4j-1.2.16.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rankeng" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-          </PATH>
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="rankeng" />
@@ -398,6 +390,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="ensembles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rankeng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rankeng-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ranking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -438,6 +456,110 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rankeng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rankeng-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ranking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rankeng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rankeng-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ranking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trees" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rankeng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rankeng-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ranking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ensembles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rankeng" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rankeng-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ranking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope">
@@ -449,13 +571,69 @@
             </PATH_ELEMENT>
           </PATH>
         </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
+        <subPane subId="All">
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rankeng" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="rankeng-core">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="rankeng-core">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="rankeng-core">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="rankeng-core">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="rankeng-core">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="rankeng-core">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="ru/compscicenter/ranking">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -463,7 +641,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_directory_selection" value="$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/data" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="OverrideImplement.combined" value="true" />
@@ -476,24 +654,34 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="Downloaded.Files.Path" value="$PROJECT_DIR$/lib" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="Downloaded.Files.Path" value="$PROJECT_DIR$/lib" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="ru.compscicenter.ranking.trees.RegressionTreeApproximator" />
+      <recent name="ru.compscicenter.ranking.trees.AdditiveTrees" />
+      <recent name="ru.compscicenter.ranking.evaluation.EvaluationLogger" />
+      <recent name="ru.compscicenter.ranking.optimization.GradientDescent" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="ru.compscicenter.ml.ranking.data" />
+      <recent name="ru.compscicenter.ranking" />
+      <recent name="ru.compscicenter.ranking.utils" />
+      <recent name="ru.compscicenter.ranking.data" />
+      <recent name="ru.compscicenter.ranking.trees" />
+      <recent name="ru.compscicenter.ranking.ensembles" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/rankeng-tools/src" />
       <recent name="$PROJECT_DIR$/rankeng-core/src" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TreeTests">
+  <component name="RunManager" selected="JUnit.rankeng-core tests">
     <configuration default="false" name="TestDataGenerator" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="ru.compscicenter.ml.ranking.data.TestDataGenerator" />
       <option name="VM_PARAMETERS" />
@@ -510,12 +698,12 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="GradientBoostedTreesLearnerTest.test2" type="JUnit" factoryName="JUnit" temporary="true">
+    <configuration default="false" name="GradientBoostingTest.test2" type="JUnit" factoryName="JUnit" temporary="true">
       <module name="rankeng-core" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="ru.compscicenter.ml.ranking.trees" />
-      <option name="MAIN_CLASS_NAME" value="ru.compscicenter.ml.ranking.trees.GradientBoostedTreesLearnerTest" />
+      <option name="PACKAGE_NAME" value="ru.compscicenter.ranking.ensembles" />
+      <option name="MAIN_CLASS_NAME" value="ru.compscicenter.ranking.ensembles.GradientBoostingTest" />
       <option name="METHOD_NAME" value="test2" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -538,14 +726,58 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="GradientBoostedTreesLearnerTest" type="JUnit" factoryName="JUnit" temporary="true">
+    <configuration default="false" name="rankeng-core tests" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="rankeng-core" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="ru.compscicenter.ranking" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="SplitterTest" type="JUnit" factoryName="JUnit" temporary="true">
       <module name="rankeng-core" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="ru.compscicenter.ml.ranking.trees" />
-      <option name="MAIN_CLASS_NAME" value="ru.compscicenter.ml.ranking.trees.GradientBoostedTreesLearnerTest" />
+      <option name="PACKAGE_NAME" value="ru.compscicenter.ranking.trees" />
+      <option name="MAIN_CLASS_NAME" value="ru.compscicenter.ranking.trees.SplitterTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="GradientBoostingTest.test1" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="rankeng-core" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="ru.compscicenter.ranking.ensembles" />
+      <option name="MAIN_CLASS_NAME" value="ru.compscicenter.ranking.ensembles.GradientBoostingTest" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -583,24 +815,6 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -626,6 +840,24 @@
       <envs />
       <properties />
       <listeners />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -681,7 +913,7 @@
       <module name="rankeng-core" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="ru.compscicenter.ml.ranking.trees" />
+      <option name="PACKAGE_NAME" value="ru.compscicenter.ranking.trees" />
       <option name="MAIN_CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -695,15 +927,23 @@
       </option>
       <envs />
       <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.TestDataGenerator" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.GradientBoostedTreesLearnerTest.test2" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.GradientBoostedTreesLearnerTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.TreeTests" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.TreeTests" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.GradientBoostingTest.test2" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.rankeng-core tests" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.SplitterTest" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.GradientBoostingTest.test1" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -744,21 +984,21 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39899832" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962063" sideWeight="0.67111856" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32888147" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -822,82 +1062,115 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/utils/PairUtils.java">
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/ensembles/GradientDescent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="251" selection-end="251" vertical-scroll-proportion="0.33802816" />
+        <state line="22" column="46" selection-start="579" selection-end="579" vertical-scroll-proportion="0.04255319" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/LambdaRankEstimator.java">
+    <entry file="file://$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/tools/LambdaLearningTool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="214" selection-end="214" vertical-scroll-proportion="0.33239436" />
+        <state line="15" column="13" selection-start="537" selection-end="537" vertical-scroll-proportion="0.31914893" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rankeng-tools/src/config/model.properties">
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/data/WeightCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="12" column="64" selection-start="334" selection-end="334" vertical-scroll-proportion="0.4787234">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/model/TargetFunction.java">
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/RegressionModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="27" selection-start="153" selection-end="153" vertical-scroll-proportion="0.2535211" />
+        <state line="8" column="17" selection-start="184" selection-end="184" vertical-scroll-proportion="0.33802816">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/AdditiveTrees.java">
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/data/DataSet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="20" selection-start="364" selection-end="364" vertical-scroll-proportion="0.46478873" />
+        <state line="13" column="13" selection-start="288" selection-end="288" vertical-scroll-proportion="0.31914893">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rankeng-core/src/script/log4j.xml">
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/RegressionTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="40" selection-start="80" selection-end="80" vertical-scroll-proportion="0.04225352" />
+        <state line="11" column="13" selection-start="266" selection-end="266" vertical-scroll-proportion="0.31914893">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/java/util/Random.class">
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/ensembles/EnsembleTrainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="24" selection-start="1580" selection-end="1580" vertical-scroll-proportion="0.34210527" />
+        <state line="9" column="17" selection-start="241" selection-end="241" vertical-scroll-proportion="0.31914893">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/RegressionTree.java">
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/RegressionModelTrainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="23" selection-start="2137" selection-end="2137" vertical-scroll-proportion="0.428115" />
+        <state line="9" column="45" selection-start="278" selection-end="278" vertical-scroll-proportion="0.35904256">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/trees/GradientBoostedTreesLearnerTest.java">
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/ensembles/GradientBoosting.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="34" selection-start="2684" selection-end="2684" vertical-scroll-proportion="-0.90140843" />
+        <state line="79" column="4" selection-start="2849" selection-end="2849" vertical-scroll-proportion="0.8909575">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/Main.java">
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/Estimator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="47" selection-start="409" selection-end="409" vertical-scroll-proportion="0.43098593" />
+        <state line="9" column="55" selection-start="254" selection-end="254" vertical-scroll-proportion="0.35904256">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rankeng-tools/src/java/ru/compscicenter/ranking/imat2009/IMat2009DataProvider.java">
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/LambdaRankEstimator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="10" selection-start="409" selection-end="409" vertical-scroll-proportion="0.39361703" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/utils/CommonUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="0" selection-start="1362" selection-end="1362" vertical-scroll-proportion="0.31382978" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/trees/GradientBoostedTreesLearner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="1107" selection-end="1107" vertical-scroll-proportion="0.31382978" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ml/ranking/utils/ProbabilityUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="140" selection-end="140" vertical-scroll-proportion="0.026595745" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ml/ranking/data/TestDataProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="5" selection-start="497" selection-end="497" vertical-scroll-proportion="0.02617801">
+        <state line="12" column="4" selection-start="255" selection-end="255" vertical-scroll-proportion="0.39893618">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/trees/RegressionTreeTrainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="49" selection-start="1601" selection-end="1601" vertical-scroll-proportion="0.8005319">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/Target.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="4" selection-start="254" selection-end="254" vertical-scroll-proportion="0.43882978">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ranking/ensembles/GradientBoostingTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="46" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.3324468">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/java/ru/compscicenter/ranking/LambdaRankTarget.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="48" selection-start="374" selection-end="374" vertical-scroll-proportion="0.44148937">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rankeng-core/src/test/ru/compscicenter/ranking/trees/RegressionTreeTrainerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="63" selection-start="2882" selection-end="2882" vertical-scroll-proportion="3.1515958">
+          <folding />
         </state>
       </provider>
     </entry>

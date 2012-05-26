@@ -1,10 +1,14 @@
 package ru.compscicenter.ranking.tools;
 
-import ru.compscicenter.ml.ranking.data.DataSet;
-import ru.compscicenter.ml.ranking.data.FeatureRow;
-import ru.compscicenter.ml.ranking.evaluation.EvaluationLogger;
-import ru.compscicenter.ml.ranking.trees.AdditiveTrees;
-import ru.compscicenter.ml.ranking.trees.GradientBoostedTreesLearner;
+import ru.compscicenter.ranking.Target;
+import ru.compscicenter.ranking.data.DataSet;
+import ru.compscicenter.ranking.data.FeatureRow;
+import ru.compscicenter.ranking.data.RichData;
+import ru.compscicenter.ranking.data.WeightCalculator;
+import ru.compscicenter.ranking.ensembles.Ensemble;
+import ru.compscicenter.ranking.trees.*;
+import ru.compscicenter.ranking.utils.Evaluator;
+import ru.compscicenter.ranking.ensembles.GradientBoosting;
 
 /**
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
@@ -12,7 +16,7 @@ import ru.compscicenter.ml.ranking.trees.GradientBoostedTreesLearner;
  */
 public class LambdaLearningTool implements LearningTool {
 
-    private AdditiveTrees model;
+    private Ensemble<RegressionTree> model;
 
     @Override
     public String getDescription() {
@@ -21,16 +25,20 @@ public class LambdaLearningTool implements LearningTool {
 
     @Override
     public void learn(DataSet learningSet, int stepNumber) {
-        GradientBoostedTreesLearner treesLearner = new GradientBoostedTreesLearner();
-        treesLearner.setMinNumPerLeaf(10);
-        treesLearner.setSampleRatio(0.5);
-        treesLearner.setShrinkage(0.1);
-        treesLearner.setMaxDepth(4);
+        Target target = new Target(new VarianceSplitter());
+        RegressionTreeTrainer regressionTreeTrainer =
+                new RegressionTreeTrainer(target, 5);
+        GradientBoosting.Builder<RegressionTree> builder =
+                new GradientBoosting.Builder<>(regressionTreeTrainer);
+        GradientBoosting<RegressionTree> gradientBoosting =
+                builder.shrinkage(0.1).bootstrapRatio(0.5).build();
 
-        model = treesLearner.learn(learningSet, stepNumber);
+        WeightCalculator weightCalculator = new WeightCalculator();
+        RichData richData = new RichData(learningSet, weightCalculator.calculateWeights(learningSet));
+        model = gradientBoosting.train(richData, stepNumber);
 
-        EvaluationLogger evaluationLogger = new EvaluationLogger(learningSet);
-        evaluationLogger.evaluate("Final model (learning): ", model);
+        Evaluator evaluator = new Evaluator(learningSet);
+        evaluator.evaluate("Final model (learning): ", model);
     }
 
     @Override

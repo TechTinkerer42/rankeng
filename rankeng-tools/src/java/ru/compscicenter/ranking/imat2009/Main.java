@@ -1,8 +1,8 @@
 package ru.compscicenter.ranking.imat2009;
 
 import org.apache.log4j.Logger;
-import ru.compscicenter.ml.ranking.data.DataProvider;
-import ru.compscicenter.ml.ranking.data.DataSet;
+import ru.compscicenter.ranking.data.DataProvider;
+import ru.compscicenter.ranking.data.DataSet;
 import ru.compscicenter.ranking.tools.LearningTool;
 
 /**

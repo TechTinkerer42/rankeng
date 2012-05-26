@@ -1,6 +1,6 @@
 package ru.compscicenter.ranking.tools;
 
-import ru.compscicenter.ml.ranking.data.DataSet;
+import ru.compscicenter.ranking.data.DataSet;
 
 /**
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com

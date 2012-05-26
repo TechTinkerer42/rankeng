@@ -1,7 +1,7 @@
 package ru.compscicenter.ranking.imat2009;
 
-import ru.compscicenter.ml.ranking.data.DataProvider;
-import ru.compscicenter.ml.ranking.data.DataSet;
+import ru.compscicenter.ranking.data.DataProvider;
+import ru.compscicenter.ranking.data.DataSet;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
