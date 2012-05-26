@@ -3,9 +3,10 @@ package ru.compscicenter.ranking.ensembles;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
-import ru.compscicenter.ranking.LambdaRankTarget;
-import ru.compscicenter.ranking.Target;
+import ru.compscicenter.ranking.target.LambdaRankTarget;
+import ru.compscicenter.ranking.target.Target;
 import ru.compscicenter.ranking.data.*;
+import ru.compscicenter.ranking.target.WeightCalculator;
 import ru.compscicenter.ranking.utils.Evaluator;
 import ru.compscicenter.ranking.trees.*;
 
@@ -47,9 +48,6 @@ public class GradientBoostingTest {
         double[] relevance = new double[]{1, 2, 3, 4, 0};
         DataSet dataSet = new DataSet(queries, featureValues, relevance);
 
-        WeightCalculator weightCalculator = new WeightCalculator();
-        RichData richData = new RichData(dataSet, weightCalculator.calculateWeights(dataSet));
-
         VarianceSplitter splitter = new VarianceSplitter();
         splitter.setMinPerLeaf(1);
 
@@ -57,13 +55,13 @@ public class GradientBoostingTest {
         RegressionTreeTrainer regressionTreeTrainer =
                 new RegressionTreeTrainer(splitter, estimator, 2);
 
-        Target target = new LambdaRankTarget();
+        Target target = new LambdaRankTarget(1.0, dataSet);
         GradientBoosting.Builder<RegressionTree> builder =
                 new GradientBoosting.Builder<>(regressionTreeTrainer, target);
         GradientBoosting<RegressionTree> gradientBoosting =
-                builder.shrinkage(0.1).bootstrapRatio(1).learningRate(1).build();
+                builder.shrinkage(0.1).bootstrapRatio(1).build();
 
-        Ensemble<RegressionTree> model = gradientBoosting.train(richData, 100);
+        Ensemble<RegressionTree> model = gradientBoosting.train(dataSet, 100);
         double[] predictions = new double[relevance.length];
         for (int index = 0; index < predictions.length; index++) {
             predictions[index] = model.predict(dataSet.getRow(index));
@@ -74,17 +72,14 @@ public class GradientBoostingTest {
 
     @Test
     public void test2() {
-        DataProvider dataProvider = new TestDataProvider("test-data/1.data", 1091, 10);
+        DataLoader dataLoader = new TestDataLoader("test-data/1.data", 1091, 10);
         DataSet dataSet;
         try {
-            dataSet = dataProvider.loadData();
+            dataSet = dataLoader.loadData();
         } catch (IOException e) {
             logger.fatal("Unexpected IO exception", e);
             throw new AssertionError("Unexpected IO exception", e);
         }
-
-        WeightCalculator weightCalculator = new WeightCalculator();
-        RichData richData = new RichData(dataSet, weightCalculator.calculateWeights(dataSet));
 
         VarianceSplitter splitter = new VarianceSplitter();
         splitter.setMinPerLeaf(1);
@@ -93,13 +88,13 @@ public class GradientBoostingTest {
         RegressionTreeTrainer regressionTreeTrainer =
                 new RegressionTreeTrainer(splitter, estimator, 2);
 
-        Target target = new LambdaRankTarget();
+        Target target = new LambdaRankTarget(1, dataSet);
         GradientBoosting.Builder<RegressionTree> builder =
                 new GradientBoosting.Builder<>(regressionTreeTrainer, target);
         GradientBoosting<RegressionTree> gradientBoosting =
-                builder.shrinkage(0.1).bootstrapRatio(1).learningRate(1).build();
+                builder.shrinkage(0.1).bootstrapRatio(1).build();
 
-        Ensemble<RegressionTree> model = gradientBoosting.train(richData, 10);
+        Ensemble<RegressionTree> model = gradientBoosting.train(dataSet, 10);
         double[] predictions = new double[dataSet.relevance().length];
         for (int index = 0; index < predictions.length; index++) {
             predictions[index] = model.predict(dataSet.getRow(index));

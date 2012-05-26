@@ -1,6 +1,6 @@
 package ru.compscicenter.ranking.ensembles;
 
-import ru.compscicenter.ranking.data.RichData;
+import ru.compscicenter.ranking.data.DataSet;
 import ru.compscicenter.ranking.RegressionModel;
 
 /**
@@ -8,6 +8,6 @@ import ru.compscicenter.ranking.RegressionModel;
  * Date: 5/26/12
  */
 public interface EnsembleTrainer<T extends RegressionModel> {
-    Ensemble<T> train(RichData richData, int numberOfIterations);
-    void improve(Ensemble<T> ensemble, RichData richData, int numberOfIterations);
+    Ensemble<T> train(DataSet dataSet, int numberOfIterations);
+    void improve(Ensemble<T> ensemble, DataSet dataSet, int numberOfIterations);
 }

@@ -1,15 +1,13 @@
 package ru.compscicenter.ranking.trees;
 
-import ru.compscicenter.ranking.data.FeatureRow;
 import ru.compscicenter.ranking.RegressionModel;
-
-import java.io.Serializable;
+import ru.compscicenter.ranking.data.FeatureRow;
 
 /**
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
  * Date:   23.04.12
  */
-public class RegressionTree implements RegressionModel, Serializable {
+public class RegressionTree implements RegressionModel {
 
     private final RegressionNode root;
 

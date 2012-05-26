@@ -4,8 +4,7 @@ import org.apache.log4j.Logger;
 import ru.compscicenter.ranking.RegressionModelTrainer;
 import ru.compscicenter.ranking.RegressionModel;
 import ru.compscicenter.ranking.data.DataSet;
-import ru.compscicenter.ranking.data.RichData;
-import ru.compscicenter.ranking.Target;
+import ru.compscicenter.ranking.target.Target;
 
 import java.util.Random;
 
@@ -26,9 +25,6 @@ public class GradientBoosting<T extends RegressionModel> implements EnsembleTrai
     // Target, which is used to fit model
     private final Target target;
 
-    // Gradient descent
-    private final GradientDescent gradientDescent;
-
     // Inner models
     private final RegressionModelTrainer<T> baseModelTrainer;
 
@@ -37,61 +33,59 @@ public class GradientBoosting<T extends RegressionModel> implements EnsembleTrai
             double shrinkage,
             double bootstrapRatio,
             int initSeed,
-            RegressionModelTrainer<T> baseModelTrainer,
-            double learningRate
+            RegressionModelTrainer<T> baseModelTrainer
     ) {
         this.target = target;
         this.shrinkage = shrinkage;
         this.bootstrapRatio = bootstrapRatio;
         this.random = new Random(initSeed);
         this.baseModelTrainer = baseModelTrainer;
-        this.gradientDescent = new GradientDescent(learningRate);
     }
 
     @Override
-    public Ensemble<T> train(RichData richData, int stepNumber) {
-        double[][] d = target.calculate(richData, richData.getDataSet().relevance());
-        DataSet dataSet = richData.getDataSet();
+    public Ensemble<T> train(DataSet dataSet, int stepNumber) {
+        double[][] d = target.calculate(dataSet, dataSet.relevance());
         DataSet newDataSet = new DataSet(dataSet.queries(), dataSet.features(), d[0]);
         T baseModel = baseModelTrainer.train(d[1], newDataSet);
 
         Ensemble<T> result = new Ensemble<>();
         result.addBaseModel(1.0, baseModel);
-        improve(result, richData, stepNumber);
+        improve(result, dataSet, stepNumber);
 
         return result;
     }
 
     @Override
-    public void improve(Ensemble<T> ensemble, RichData richData, int numberOfIterations) {
+    public void improve(Ensemble<T> ensemble, DataSet dataSet, int numberOfIterations) {
 
-        double[] predictions = new double[richData.getDataSet().numberOfRows()];
-        for (int index = 0; index < richData.getDataSet().numberOfRows(); index++) {
-            predictions[index] = ensemble.predict(richData.getDataSet().getRow(index));
+        double[] predictions = new double[dataSet.numberOfRows()];
+        for (int index = 0; index < dataSet.numberOfRows(); index++) {
+            predictions[index] = ensemble.predict(dataSet.getRow(index));
         }
 
         for (int stepCounter = 1; stepCounter <= numberOfIterations; stepCounter++) {
-            RichData subset = bootstrap(richData);
+            DataSet subset = bootstrap(dataSet);
 
             double[][] d = target.calculate(subset, predictions);
-            DataSet dataSet = subset.getDataSet();
             DataSet newSubset = new DataSet(dataSet.queries(), dataSet.features(), d[0]);
             T newBaseModel = baseModelTrainer.train(d[1], newSubset);
 
-            double gamma = gradientDescent.optimize(subset, predictions, newBaseModel);
-            logger.debug("gamma=" + gamma);
+            CoefficientOptimizer coefficientOptimizer = target.makeOptimizer();
+            double coefficient =
+                    coefficientOptimizer.optimize(subset, predictions, newBaseModel);
+            logger.debug("coefficient=" + coefficient);
 
-            ensemble.addBaseModel(shrinkage * gamma, newBaseModel);
+            ensemble.addBaseModel(shrinkage * coefficient, newBaseModel);
 
-            for (int index = 0; index < richData.getDataSet().numberOfRows(); index++) {
-                predictions[index] += gamma * shrinkage * newBaseModel.predict(richData.getDataSet().getRow(index));
+            for (int index = 0; index < dataSet.numberOfRows(); index++) {
+                predictions[index] += coefficient * shrinkage * newBaseModel.predict(dataSet.getRow(index));
             }
         }
     }
 
-    private RichData bootstrap(RichData richData) {
+    private DataSet bootstrap(DataSet dataSet) {
         int randomSeed = random.nextInt();
-        return richData.split(bootstrapRatio, randomSeed).first();
+        return dataSet.split(bootstrapRatio, randomSeed).first();
     }
 
     public static class Builder<T extends RegressionModel> {
@@ -100,8 +94,6 @@ public class GradientBoosting<T extends RegressionModel> implements EnsembleTrai
         private int initSeed = 7; // Init seed for random in bootstrapping
         private double shrinkage = 0.1;
         private double bootstrapRatio = 0.5; // for bootstrapping
-
-        private double learningRate = 0.001; // for gradient descent
 
         private final RegressionModelTrainer<T> baseModelTrainer;
         private final Target target;
@@ -117,8 +109,7 @@ public class GradientBoosting<T extends RegressionModel> implements EnsembleTrai
                     shrinkage,
                     bootstrapRatio,
                     initSeed,
-                    baseModelTrainer,
-                    learningRate
+                    baseModelTrainer
             );
         }
 
@@ -134,11 +125,6 @@ public class GradientBoosting<T extends RegressionModel> implements EnsembleTrai
 
         public Builder<T> bootstrapRatio(double bootstrapRatio) {
             this.bootstrapRatio = bootstrapRatio;
-            return this;
-        }
-
-        public Builder<T> learningRate(double learningRate) {
-            this.learningRate = learningRate;
             return this;
         }
     }

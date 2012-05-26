@@ -9,13 +9,13 @@ import java.util.*;
  * Author: Vasiliy Khomutov - vasiliy.khomutov@gmail.com
  * Date: 5/25/12
  */
-public class TestDataProvider implements DataProvider {
+public class TestDataLoader implements DataLoader {
 
     private final String inputFile;
     private final int numberOfLines;
     private final int numberOfFeatures;
 
-    public TestDataProvider(String inputFile, int numberOfLines, int numberOfFeatures) {
+    public TestDataLoader(String inputFile, int numberOfLines, int numberOfFeatures) {
         this.inputFile = inputFile;
         this.numberOfLines = numberOfLines;
         this.numberOfFeatures = numberOfFeatures;

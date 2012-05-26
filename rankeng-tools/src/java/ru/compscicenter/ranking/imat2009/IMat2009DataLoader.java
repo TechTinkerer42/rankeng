@@ -1,6 +1,6 @@
 package ru.compscicenter.ranking.imat2009;
 
-import ru.compscicenter.ranking.data.DataProvider;
+import ru.compscicenter.ranking.data.DataLoader;
 import ru.compscicenter.ranking.data.DataSet;
 
 import java.io.BufferedReader;
@@ -12,11 +12,11 @@ import java.util.*;
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
  * Date:   24.04.12
  */
-public class IMat2009DataProvider implements DataProvider {
+public class IMat2009DataLoader implements DataLoader {
 
     private final String inputFile;
 
-    public IMat2009DataProvider(String inputFile) {
+    public IMat2009DataLoader(String inputFile) {
         this.inputFile = inputFile;
     }
 

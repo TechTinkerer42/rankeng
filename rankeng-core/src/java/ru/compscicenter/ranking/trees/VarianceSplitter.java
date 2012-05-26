@@ -106,7 +106,7 @@ public class VarianceSplitter implements Splitter {
         return indexedValues;
     }
 
-    private static class VarianceAggregator {
+    static class VarianceAggregator {
         private double sumW = 0.0;
         private double sumWR = 0.0;
         private double sumWRR = 0.0;
