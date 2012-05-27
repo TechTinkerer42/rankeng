@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
+ * Author: Vasiliy Khomutov - vasiliy.khomutov@gmail.com
  * Date:   18.04.12
  */
 public class RegressionTreesTest {

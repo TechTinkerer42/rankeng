@@ -1,6 +1,5 @@
 package ru.compscicenter.ranking.data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

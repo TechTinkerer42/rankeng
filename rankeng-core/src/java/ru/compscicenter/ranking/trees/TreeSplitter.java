@@ -5,7 +5,7 @@ import ru.compscicenter.ranking.data.Outputs;
 import ru.compscicenter.ranking.utils.Pair;
 
 /**
- * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
+ * Author: Vasiliy Khomutov - vasiliy.khomutov@gmail.com
  * Date:   22.04.12
  */
 public interface TreeSplitter {

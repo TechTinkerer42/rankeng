@@ -1,12 +1,20 @@
 package ru.compscicenter.ranking.imat2009;
 
-import ru.compscicenter.ranking.data.*;
+import ru.compscicenter.ranking.data.DataLoader;
+import ru.compscicenter.ranking.data.DataSet;
+import ru.compscicenter.ranking.data.Instance;
+import ru.compscicenter.ranking.data.Outputs;
+import ru.compscicenter.ranking.data.Query;
 import ru.compscicenter.ranking.utils.Pair;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
@@ -48,7 +56,7 @@ public class IMat2009DataLoader implements DataLoader {
         return new Pair<>(dataSet, outputs);
     }
 
-    public List<Query> queriesDocs(List<Integer> queryList, double[][] features) {
+    private List<Query> queriesDocs(List<Integer> queryList, double[][] features) {
         Map<Integer, List<Instance>> queriesInstances = new LinkedHashMap<>();
         for (int index = 0; index < queryList.size(); index++) {
             Integer queryIndex = queryList.get(index);
@@ -68,7 +76,7 @@ public class IMat2009DataLoader implements DataLoader {
         return result;
     }
 
-    public static Integer parseQueries(String line) {
+    private Integer parseQueries(String line) {
         String[] tokens = line.split(" ");
         Integer query = null;
         boolean isQuery = false;
@@ -86,11 +94,11 @@ public class IMat2009DataLoader implements DataLoader {
         return query;
     }
 
-    public static Double parseRelevance(String line) {
+    private Double parseRelevance(String line) {
         return Double.parseDouble(line.split(" ")[0]);
     }
 
-    public static List<Double> parseFeatures(String line) {
+    private List<Double> parseFeatures(String line) {
         List<Double> featureValues = new ArrayList<>();
         for (int index = 0; index < 245; index++) {
             featureValues.add(0.0);
@@ -105,7 +113,7 @@ public class IMat2009DataLoader implements DataLoader {
         return featureValues;
     }
 
-    private static double[][] featuresAsArray(List<List<Double>> valuesList) {
+    private double[][] featuresAsArray(List<List<Double>> valuesList) {
         double[][] result = new double[valuesList.size()][];
         int i = 0;
         for (List<Double> valuesRaw : valuesList) {

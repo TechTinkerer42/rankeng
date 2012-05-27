@@ -2,10 +2,15 @@ package ru.compscicenter.ranking.data;
 
 import ru.compscicenter.ranking.utils.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Iterator;
+
 
 /**
- * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
+ * Author: Vasiliy Khomutov - vasiliy.khomutov@gmail.com
  * Date:   18.04.12
  */
 public class DataSet implements Iterable<Instance> {

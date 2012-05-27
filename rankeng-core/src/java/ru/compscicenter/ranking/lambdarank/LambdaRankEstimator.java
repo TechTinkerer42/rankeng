@@ -4,10 +4,8 @@ import ru.compscicenter.ranking.data.DataSet;
 import ru.compscicenter.ranking.data.Instance;
 import ru.compscicenter.ranking.data.Outputs;
 import ru.compscicenter.ranking.data.Query;
-import ru.compscicenter.ranking.trees.Weights;
 import ru.compscicenter.ranking.trees.TreeEstimator;
-
-import java.util.List;
+import ru.compscicenter.ranking.trees.Weights;
 
 /**
  * Author: Vasiliy Khomutov - vasiliy.khomutov@gmail.com

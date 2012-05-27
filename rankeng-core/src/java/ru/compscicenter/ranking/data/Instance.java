@@ -27,8 +27,4 @@ public class Instance {
     public double featureValue(int featureIndex) {
         return features[featureIndex];
     }
-
-    public int numberOfFeatures() {
-        return features.length;
-    }
 }

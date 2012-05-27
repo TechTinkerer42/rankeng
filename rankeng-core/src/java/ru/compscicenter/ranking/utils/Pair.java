@@ -1,7 +1,7 @@
 package ru.compscicenter.ranking.utils;
 
 /**
- * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
+ * Author: Vasiliy Khomutov - vasiliy.khomutov@gmail.com
  * Date:   19.04.12
  */
 public class Pair<A, B> {
@@ -29,8 +29,12 @@ public class Pair<A, B> {
 
         Pair pair = (Pair) o;
 
-        if (first != null ? !first.equals(pair.first) : pair.first != null) return false;
-        if (second != null ? !second.equals(pair.second) : pair.second != null) return false;
+        if (first != null ? !first.equals(pair.first) : pair.first != null) {
+            return false;
+        }
+        if (second != null ? !second.equals(pair.second) : pair.second != null) {
+            return false;
+        }
 
         return true;
     }

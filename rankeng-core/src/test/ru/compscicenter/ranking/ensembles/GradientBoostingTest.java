@@ -6,7 +6,9 @@ import org.junit.Test;
 import ru.compscicenter.ranking.Target;
 import ru.compscicenter.ranking.data.DataLoader;
 import ru.compscicenter.ranking.data.DataSet;
+import ru.compscicenter.ranking.data.Instance;
 import ru.compscicenter.ranking.data.Outputs;
+import ru.compscicenter.ranking.data.Query;
 import ru.compscicenter.ranking.data.TestDataLoader;
 import ru.compscicenter.ranking.lambdarank.LambdaRankEstimator;
 import ru.compscicenter.ranking.lambdarank.LambdaRankTarget;
@@ -19,15 +21,19 @@ import ru.compscicenter.ranking.utils.Pair;
 import ru.compscicenter.ranking.utils.RankingUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
+ * Author: Vasiliy Khomutov - vasiliy.khomutov@gmail.com
  * Date:   19.04.12
  */
 public class GradientBoostingTest {
 
     private static final Logger logger = Logger.getLogger(GradientBoostingTest.class);
-            /*
+
     @Test
     public void test1() {
         double[][] featureValues = new double[][]{
@@ -38,22 +44,34 @@ public class GradientBoostingTest {
                 {0, 0, 1, 0, 0}
         };
 
-        List<Query> queries = new ArrayList<>();
+        Instance instance0 = new Instance(0, 0, featureValues[0]);
+        Instance instance1 = new Instance(1, 0, featureValues[1]);
+        Instance instance2 = new Instance(2, 1, featureValues[2]);
+        Instance instance3 = new Instance(3, 1, featureValues[3]);
+        Instance instance4 = new Instance(4, 1, featureValues[4]);
 
         List<Instance> query1Instances = new ArrayList<>();
-        query1Instances.add(new Instance(0, 0, featureValues[0]));
-        query1Instances.add(new Instance(1, 0, featureValues[1]));
+        query1Instances.add(instance0);
+        query1Instances.add(instance1);
 
         List<Instance> query2Instances = new ArrayList<>();
-        query2Instances.add(new Instance(2, 1, featureValues[2]));
-        query2Instances.add(new Instance(3, 1, featureValues[3]));
-        query2Instances.add(new Instance(4, 1, featureValues[4]));
+        query2Instances.add(instance2);
+        query2Instances.add(instance3);
+        query2Instances.add(instance4);
 
+        List<Query> queries = new ArrayList<>();
         queries.add(new Query(query1Instances));
         queries.add(new Query(query2Instances));
 
-        Outputs relevance = new Outputs(new double[]{1, 2, 3, 4, 0});
         DataSet dataSet = new DataSet(queries, 5);
+
+        Map<Instance, Double> relevanceMap = new HashMap<>();
+        relevanceMap.put(instance0, 1.0);
+        relevanceMap.put(instance1, 2.0);
+        relevanceMap.put(instance2, 3.0);
+        relevanceMap.put(instance3, 4.0);
+        relevanceMap.put(instance4, 0.0);
+        Outputs outputs = new Outputs(relevanceMap);
 
         VarianceTreeSplitter splitter = new VarianceTreeSplitter();
         splitter.setMinPerLeaf(1);
@@ -62,20 +80,20 @@ public class GradientBoostingTest {
         RegressionTreeTrainer regressionTreeTrainer =
                 new RegressionTreeTrainer(splitter, treeEstimator, 2);
 
-        Target target = new LambdaRankTarget(1.0, dataSet, relevance);
+        Target target = new LambdaRankTarget(1.0, dataSet, outputs);
         GradientBoosting.Builder<RegressionTree> builder =
                 new GradientBoosting.Builder<>(regressionTreeTrainer, target);
         GradientBoosting<RegressionTree> gradientBoosting =
                 builder.shrinkage(0.1).bootstrapRatio(1).build();
 
-        Ensemble<RegressionTree> model = gradientBoosting.train(dataSet, relevance, 50);
+        Ensemble<RegressionTree> model = gradientBoosting.train(dataSet, outputs, 50);
         Outputs predictions = RankingUtils.predictAll(dataSet, model);
 
         Assert.assertTrue(
                 "DCG",
-                Double.compare(4.0, Evaluator.calculateDCG(dataSet, relevance, predictions)) == 0
+                Double.compare(4.0, Evaluator.calculateDCG(dataSet, outputs, predictions)) == 0
         );
-    }             */
+    }
 
     @Test
     public void test2() {

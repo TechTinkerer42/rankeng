@@ -1,14 +1,17 @@
 package ru.compscicenter.ranking.utils;
 
 import org.apache.log4j.Logger;
-import ru.compscicenter.ranking.data.*;
 import ru.compscicenter.ranking.RegressionModel;
+import ru.compscicenter.ranking.data.DataSet;
+import ru.compscicenter.ranking.data.Instance;
+import ru.compscicenter.ranking.data.Outputs;
+import ru.compscicenter.ranking.data.Query;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
+ * Author: Vasiliy Khomutov - vasiliy.khomutov@gmail.com
  * Date:   24.04.12
  */
 public class Evaluator {

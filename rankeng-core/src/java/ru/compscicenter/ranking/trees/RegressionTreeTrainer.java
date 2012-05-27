@@ -7,7 +7,7 @@ import ru.compscicenter.ranking.data.Outputs;
 import ru.compscicenter.ranking.utils.Pair;
 
 /**
- * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
+ * Author: Vasiliy Khomutov - vasiliy.khomutov@gmail.com
  * Date:   23.04.12
  */
 public class RegressionTreeTrainer implements RegressionModelTrainer<RegressionTree> {

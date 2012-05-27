@@ -35,7 +35,7 @@ public class GradientBoosting<T extends RegressionModel> implements EnsembleTrai
     // Inner models
     private final RegressionModelTrainer<T> baseModelTrainer;
 
-    protected GradientBoosting(
+    private GradientBoosting(
             Target target,
             double shrinkage,
             double bootstrapRatio,

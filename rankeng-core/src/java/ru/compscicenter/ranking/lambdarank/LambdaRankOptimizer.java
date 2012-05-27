@@ -21,7 +21,7 @@ public class LambdaRankOptimizer implements CoefficientOptimizer {
     private static final double DESCENT_START_VALUE = 1.0;
 
     private double learningRate = 0.001;
-    private PairWeights pairWeights;
+    private final PairWeights pairWeights;
 
 
     public LambdaRankOptimizer(double learningRate, PairWeights pairWeights) {

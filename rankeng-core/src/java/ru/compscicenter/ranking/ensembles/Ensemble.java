@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Ensemble<T extends RegressionModel> implements RegressionModel {
 
-    private List<Pair<Double, T>> baseModels = new ArrayList<>();
+    private final List<Pair<Double, T>> baseModels = new ArrayList<>();
 
     public void addBaseModel(double coefficient, T baseModel) {
         baseModels.add(new Pair<>(coefficient, baseModel));
