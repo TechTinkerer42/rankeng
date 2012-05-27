@@ -1,5 +1,7 @@
 package ru.compscicenter.ranking.data;
 
+import ru.compscicenter.ranking.utils.Pair;
+
 import java.io.IOException;
 
 /**
@@ -7,5 +9,5 @@ import java.io.IOException;
  * Date: 5/25/12
  */
 public interface DataLoader {
-    DataSet loadData() throws IOException;
+    Pair<DataSet, Outputs> loadData() throws IOException;
 }

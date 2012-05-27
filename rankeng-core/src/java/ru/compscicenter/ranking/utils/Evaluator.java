@@ -1,8 +1,7 @@
 package ru.compscicenter.ranking.utils;
 
 import org.apache.log4j.Logger;
-import ru.compscicenter.ranking.data.DataSet;
-import ru.compscicenter.ranking.data.FeatureRow;
+import ru.compscicenter.ranking.data.*;
 import ru.compscicenter.ranking.RegressionModel;
 
 import java.util.ArrayList;
@@ -17,45 +16,41 @@ public class Evaluator {
     private static final Logger logger = Logger.getLogger(Evaluator.class);
 
     private final DataSet testSet;
+    private final Outputs testRelevance;
 
-    public Evaluator(DataSet testSet) {
+    public Evaluator(DataSet testSet, Outputs testRelevance) {
         this.testSet = testSet;
+        this.testRelevance = testRelevance;
     }
 
     public void evaluate(String message, RegressionModel ensemble) {
-        double[] predictions = new double[testSet.numberOfRows()];
-        int index = 0;
-        for (FeatureRow featureRow : testSet.getRowList()) {
-            predictions[index] = ensemble.predict(featureRow);
-            index++;
-        }
-        evaluate(message, predictions);
+        evaluate(message, RankingUtils.predictAll(testSet, ensemble));
     }
 
-    public void evaluate(String message, double[] predictions) {
+    public void evaluate(String message, Outputs predictions) {
         if (testSet.queries().isEmpty()) {
             logger.error("Evaluation - Test set is empty");
         }
 
-        String text = message + "DCG=" + calculateDCG(testSet, predictions);
+        String text = message + "DCG=" + calculateDCG(testSet, testRelevance, predictions);
         logger.debug(text);
     }
 
-    public static double calculateDCG(DataSet dataSet, double[] predictions) {
+    public static double calculateDCG(DataSet dataSet, Outputs relevance, Outputs predictions) {
         double sum = 0.0;
         double size = 0;
-        for (List<Integer> query : dataSet.queries()) {
+        for (Query query : dataSet.queries()) {
             int i = 1;
-            List<Pair<Integer, Double>> pairs = new ArrayList<>();
-            for (int doc : query) {
-                pairs.add(new Pair<>(doc, -predictions[doc]));
+            List<Pair<Instance, Double>> pairs = new ArrayList<>();
+            for (Instance instance : query.getInstances()) {
+                pairs.add(new Pair<>(instance, -predictions.valueOf(instance)));
             }
             PairUtils.sortBySecond(pairs);
-            for (Integer doc : PairUtils.firsts(pairs)) {
-                sum += dataSet.relevanceAt(doc) / (Math.log(i) / Math.log(2) + 1);
+            for (Instance instance : PairUtils.firsts(pairs)) {
+                sum += relevance.valueOf(instance) / (Math.log(i) / Math.log(2) + 1);
                 i++;
             }
-            if (!query.isEmpty()) {
+            if (!query.getInstances().isEmpty()) {
                 size++;
             }
         }

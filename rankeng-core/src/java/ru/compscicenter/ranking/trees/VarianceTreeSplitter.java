@@ -1,6 +1,9 @@
 package ru.compscicenter.ranking.trees;
 
 import ru.compscicenter.ranking.data.DataSet;
+import ru.compscicenter.ranking.data.Instance;
+import ru.compscicenter.ranking.data.Outputs;
+import ru.compscicenter.ranking.data.Query;
 import ru.compscicenter.ranking.utils.Pair;
 import ru.compscicenter.ranking.utils.PairUtils;
 
@@ -12,7 +15,7 @@ import java.util.List;
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
  * Date:   23.04.12
  */
-public class VarianceSplitter implements Splitter {
+public class VarianceTreeSplitter implements TreeSplitter {
 
     private int minPerLeaf = 20; // will be deprecated
 
@@ -21,18 +24,18 @@ public class VarianceSplitter implements Splitter {
     }
 
     @Override
-    public Pair<Integer, Double> obtainSplit(double[] weights, DataSet dataSet) {
+    public Pair<Integer, Double> obtainSplit(Weights weights, DataSet dataSet, Outputs outputs) {
         Pair<Integer, Double> result = null;
         double minVariance = Double.MAX_VALUE;
         for (int featureIndex = 0; featureIndex < dataSet.numberOfFeatures(); featureIndex++) {
-            List<Pair<Integer, Double>> indexedValues = getIndexedValues(dataSet, featureIndex);
+            List<Pair<Instance, Double>> indexedValues = getIndexedValues(dataSet, featureIndex);
 
             // Variances of left subgroups of observations
-            List<Pair<Double, Double>> leftVariances = aggregateVariances(weights, dataSet, indexedValues);
+            List<Pair<Double, Double>> leftVariances = aggregateVariances(weights, outputs, indexedValues);
 
             // Variances of right subgroups of observations
             Collections.reverse(indexedValues);
-            List<Pair<Double, Double>> rightVariances = aggregateVariances(weights, dataSet, indexedValues);
+            List<Pair<Double, Double>> rightVariances = aggregateVariances(weights, outputs, indexedValues);
 
             // Sum observations
             List<Pair<Double, Double>> variances = new ArrayList<>();
@@ -55,28 +58,28 @@ public class VarianceSplitter implements Splitter {
     }
 
     private List<Pair<Double, Double>> aggregateVariances(
-            double[] weights,
-            DataSet dataSet,
-            List<Pair<Integer, Double>> indexedValues
+            Weights weights,
+            Outputs outputs,
+            List<Pair<Instance, Double>> indexedValues
     ) {
         VarianceAggregator varianceAggregator = new VarianceAggregator();
         List<Pair<Double, Double>> partialVariances = new ArrayList<>();
-        for (Pair<Double, List<Integer>> splitValue : calculateSplitValues(indexedValues)) {
-            for (Integer doc : splitValue.second()) {
-                varianceAggregator.add(weights[doc], dataSet.relevanceAt(doc));
+        for (Pair<Double, List<Instance>> splitValue : calculateSplitValues(indexedValues)) {
+            for (Instance instance : splitValue.second()) {
+                varianceAggregator.add(weights.weightOf(instance), outputs.valueOf(instance));
             }
             partialVariances.add(new Pair<>(splitValue.first(), varianceAggregator.variance()));
         }
         return partialVariances;
     }
 
-    public List<Pair<Double, List<Integer>>> calculateSplitValues(List<Pair<Integer, Double>> indexedValues) {
-        List<Pair<Double, List<Integer>>> result = new ArrayList<>();
+    public List<Pair<Double, List<Instance>>> calculateSplitValues(List<Pair<Instance, Double>> indexedValues) {
+        List<Pair<Double, List<Instance>>> result = new ArrayList<>();
         double prevValue = indexedValues.get(0).second();
-        List<Integer> values = new ArrayList<>();
+        List<Instance> values = new ArrayList<>();
         int leftCount = 0;
         int rightCount = indexedValues.size();
-        for (Pair<Integer, Double> indexedValue : indexedValues) {
+        for (Pair<Instance, Double> indexedValue : indexedValues) {
             double curValue = indexedValue.second();
             if (Double.compare(prevValue, curValue) == 0) {
                 values.add(indexedValue.first());
@@ -94,11 +97,11 @@ public class VarianceSplitter implements Splitter {
         return result;
     }
 
-    private List<Pair<Integer, Double>> getIndexedValues(DataSet dataSet, int featureIndex) {
-        List<Pair<Integer, Double>> indexedValues = new ArrayList<>();
-        for (List<Integer> query : dataSet.queries()) {
-            for (Integer doc : query) {
-                indexedValues.add(new Pair<>(doc, dataSet.getRow(doc).valueAt(featureIndex)));
+    private List<Pair<Instance, Double>> getIndexedValues(DataSet dataSet, int featureIndex) {
+        List<Pair<Instance, Double>> indexedValues = new ArrayList<>();
+        for (Query query : dataSet.queries()) {
+            for (Instance instance : query.getInstances()) {
+                indexedValues.add(new Pair<>(instance, instance.featureValue(featureIndex)));
             }
         }
         PairUtils.sortBySecond(indexedValues);

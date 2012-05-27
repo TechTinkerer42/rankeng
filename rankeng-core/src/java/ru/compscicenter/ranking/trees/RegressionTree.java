@@ -1,7 +1,7 @@
 package ru.compscicenter.ranking.trees;
 
 import ru.compscicenter.ranking.RegressionModel;
-import ru.compscicenter.ranking.data.FeatureRow;
+import ru.compscicenter.ranking.data.Instance;
 
 /**
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
@@ -27,10 +27,10 @@ public class RegressionTree implements RegressionModel {
     }
 
     @Override
-    public double predict(FeatureRow featureRow) {
+    public double predict(Instance instance) {
         RegressionNode current = root;
         while (!current.isLeaf()) {
-            if (featureRow.valueAt(current.splitIndex) <= current.splitValue) {
+            if (instance.featureValue(current.splitIndex) <= current.splitValue) {
                 current = current.lessOrEqualNode();
             } else {
                 current = current.greaterNode();

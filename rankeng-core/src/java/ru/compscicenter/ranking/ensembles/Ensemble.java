@@ -1,7 +1,7 @@
 package ru.compscicenter.ranking.ensembles;
 
 import ru.compscicenter.ranking.RegressionModel;
-import ru.compscicenter.ranking.data.FeatureRow;
+import ru.compscicenter.ranking.data.Instance;
 import ru.compscicenter.ranking.utils.Pair;
 
 import java.util.ArrayList;
@@ -20,10 +20,10 @@ public class Ensemble<T extends RegressionModel> implements RegressionModel {
     }
 
     @Override
-    public double predict(FeatureRow featureRow) {
+    public double predict(Instance instance) {
         double result = 0;
         for (Pair<Double, T> baseModel : baseModels) {
-            result += baseModel.first() * baseModel.second().predict(featureRow);
+            result += baseModel.first() * baseModel.second().predict(instance);
         }
         return result;
     }

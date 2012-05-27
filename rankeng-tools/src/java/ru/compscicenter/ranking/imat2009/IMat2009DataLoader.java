@@ -1,7 +1,7 @@
 package ru.compscicenter.ranking.imat2009;
 
-import ru.compscicenter.ranking.data.DataLoader;
-import ru.compscicenter.ranking.data.DataSet;
+import ru.compscicenter.ranking.data.*;
+import ru.compscicenter.ranking.utils.Pair;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -21,7 +21,7 @@ public class IMat2009DataLoader implements DataLoader {
     }
 
     @Override
-    public DataSet loadData() throws IOException {
+    public Pair<DataSet, Outputs> loadData() throws IOException {
         List<List<Double>> valuesList = new ArrayList<>();
         List<Double> relevance = new ArrayList<>();
         List<Integer> queries = new ArrayList<>();
@@ -34,48 +34,37 @@ public class IMat2009DataLoader implements DataLoader {
             }
         }
 
-        List<List<Integer>> queriesDocs = queriesDocs(queries);
         double[][] features = featuresAsArray(valuesList);
-        double[] relevanceArray = relevanceAsArray(relevance);
+        List<Query> queriesDocs = queriesDocs(queries, features);
 
-        return new DataSet(queriesDocs, features, relevanceArray);
-    }
-
-    Set<Double> relevanceValues(DataSet dataSet) {
-        Set<Double> result = new HashSet<>();
-        for (double r : dataSet.relevance()){
-            result.add(r);
+        DataSet dataSet = new DataSet(queriesDocs, features[0].length);
+        Map<Instance, Double> relevanceAsMap = new HashMap<>();
+        for (Instance instance : dataSet) {
+            relevanceAsMap.put(instance, relevance.get(instance.getId()));
         }
-        return result;
+
+        Outputs outputs = new Outputs(relevanceAsMap);
+
+        return new Pair<>(dataSet, outputs);
     }
 
-
-    public List<List<Integer>> queriesDocs(List<Integer> queryList) {
-        Map<Integer, List<Integer>> queriesDocs = new LinkedHashMap<>();
+    public List<Query> queriesDocs(List<Integer> queryList, double[][] features) {
+        Map<Integer, List<Instance>> queriesInstances = new LinkedHashMap<>();
         for (int index = 0; index < queryList.size(); index++) {
-            List<Integer> queryDocs = queriesDocs.get(queryList.get(index));
-            if (queryDocs == null) {
-                queryDocs = new ArrayList<>();
-                queriesDocs.put(queryList.get(index), queryDocs);
+            Integer queryIndex = queryList.get(index);
+            List<Instance> queryInstances = queriesInstances.get(queryIndex);
+            if (queryInstances == null) {
+                queryInstances = new ArrayList<>();
+                queriesInstances.put(queryIndex, queryInstances);
             }
-            queryDocs.add(index);
+            queryInstances.add(new Instance(index, queryIndex, features[index]));
         }
 
-        List<List<Integer>> result = new ArrayList<>();
-        for (Map.Entry<Integer, List<Integer>> entry : queriesDocs.entrySet()) {
-            result.add(entry.getValue());
+        List<Query> result = new ArrayList<>();
+        for (Map.Entry<Integer, List<Instance>> entry : queriesInstances.entrySet()) {
+            result.add(new Query(entry.getValue()));
         }
 
-        return result;
-    }
-
-    private double[] relevanceAsArray(List<Double> relevance) {
-        double[] result = new double[relevance.size()];
-        int index = 0;
-        for (double d : relevance) {
-            result[index] = d;
-            index++;
-        }
         return result;
     }
 

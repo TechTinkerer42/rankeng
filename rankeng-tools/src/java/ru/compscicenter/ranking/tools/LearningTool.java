@@ -1,6 +1,8 @@
 package ru.compscicenter.ranking.tools;
 
+import ru.compscicenter.ranking.RegressionModel;
 import ru.compscicenter.ranking.data.DataSet;
+import ru.compscicenter.ranking.data.Outputs;
 
 /**
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
@@ -8,6 +10,5 @@ import ru.compscicenter.ranking.data.DataSet;
  */
 public interface LearningTool {
     String getDescription();
-    void learn(DataSet learningSet, int stepNumber);
-    double[] predict(DataSet testSet);
+    RegressionModel trainModel(DataSet dataSet, Outputs relevance, int stepNumber);
 }

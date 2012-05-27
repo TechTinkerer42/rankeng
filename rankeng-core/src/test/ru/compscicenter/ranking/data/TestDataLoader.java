@@ -1,5 +1,7 @@
 package ru.compscicenter.ranking.data;
 
+import ru.compscicenter.ranking.utils.Pair;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,7 +24,7 @@ public class TestDataLoader implements DataLoader {
     }
 
     @Override
-    public DataSet loadData() throws IOException {
+    public Pair<DataSet, Outputs> loadData() throws IOException {
 
         double[] relevance = new double[numberOfLines];
         double[][] features = new double[numberOfLines][numberOfFeatures];
@@ -48,13 +50,25 @@ public class TestDataLoader implements DataLoader {
                 index++;
             }
         }
-        return new DataSet(getQueriesAsList(queries), features, relevance);
+        DataSet dataSet = new DataSet(getQueriesAsList(queries, features), numberOfFeatures);
+        Map<Instance, Double> relevanceMap = new HashMap<>();
+        for (Instance instance : dataSet) {
+            relevanceMap.put(instance, relevance[instance.getId()]);
+        }
+
+        Outputs outputs = new Outputs(relevanceMap);
+
+        return new Pair<>(dataSet, outputs);
     }
 
-    private List<List<Integer>> getQueriesAsList(Map<Integer, List<Integer>> queriesMap) {
-        List<List<Integer>> result = new ArrayList<>();
-        for (Map.Entry<Integer, List<Integer>> queryDocs : queriesMap.entrySet()) {
-            result.add(queryDocs.getValue());
+    private List<Query> getQueriesAsList(Map<Integer, List<Integer>> queriesMap, double[][] features) {
+        List<Query> result = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : queriesMap.entrySet()) {
+            List<Instance> queryInstances = new ArrayList<>();
+            for (Integer instanceId : entry.getValue()) {
+                queryInstances.add(new Instance(instanceId, entry.getKey(), features[instanceId]));
+            }
+            result.add(new Query(queryInstances));
         }
         return result;
     }

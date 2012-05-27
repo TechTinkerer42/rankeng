@@ -1,11 +1,18 @@
 package ru.compscicenter.ranking.ensembles;
 
 import org.apache.log4j.Logger;
-import ru.compscicenter.ranking.RegressionModelTrainer;
 import ru.compscicenter.ranking.RegressionModel;
+import ru.compscicenter.ranking.RegressionModelTrainer;
+import ru.compscicenter.ranking.Target;
 import ru.compscicenter.ranking.data.DataSet;
-import ru.compscicenter.ranking.target.Target;
+import ru.compscicenter.ranking.data.Instance;
+import ru.compscicenter.ranking.data.Outputs;
+import ru.compscicenter.ranking.trees.Weights;
+import ru.compscicenter.ranking.utils.Pair;
+import ru.compscicenter.ranking.utils.RankingUtils;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -43,44 +50,65 @@ public class GradientBoosting<T extends RegressionModel> implements EnsembleTrai
     }
 
     @Override
-    public Ensemble<T> train(DataSet dataSet, int stepNumber) {
-        double[][] d = target.calculate(dataSet, dataSet.relevance());
-        DataSet newDataSet = new DataSet(dataSet.queries(), dataSet.features(), d[0]);
-        T baseModel = baseModelTrainer.train(d[1], newDataSet);
+    public Ensemble<T> train(DataSet dataSet, Outputs relevance, int stepNumber) {
+//        double[] weights = new double[dataSet.size()];
+//        Arrays.fill(weights, 1);
+        logger.info("Training model (steps = " + stepNumber + ", data set size is " + dataSet.size() + ")");
+
+        Pair<Weights, Outputs> pair = target.calculate(dataSet, relevance);
+        T baseModel = baseModelTrainer.train(pair.first(), dataSet, pair.second());
 
         Ensemble<T> result = new Ensemble<>();
         result.addBaseModel(1.0, baseModel);
-        improve(result, dataSet, stepNumber);
+        improve(result, dataSet, relevance, stepNumber);
 
         return result;
     }
 
     @Override
-    public void improve(Ensemble<T> ensemble, DataSet dataSet, int numberOfIterations) {
+    public void improve(Ensemble<T> ensemble, DataSet dataSet, Outputs relevance, int numberOfIterations) {
+        Outputs predictions = RankingUtils.predictAll(dataSet, ensemble);
 
-        double[] predictions = new double[dataSet.numberOfRows()];
-        for (int index = 0; index < dataSet.numberOfRows(); index++) {
-            predictions[index] = ensemble.predict(dataSet.getRow(index));
-        }
+        for (int step = 1; step <= numberOfIterations; step++) {
+            logger.debug("Starting step " + step);
 
-        for (int stepCounter = 1; stepCounter <= numberOfIterations; stepCounter++) {
+            logger.debug("Bootstrapping (step" + step + ")");
             DataSet subset = bootstrap(dataSet);
 
-            double[][] d = target.calculate(subset, predictions);
-            DataSet newSubset = new DataSet(dataSet.queries(), dataSet.features(), d[0]);
-            T newBaseModel = baseModelTrainer.train(d[1], newSubset);
+            logger.debug("Training base model (step = " + step + ")");
+            Pair<Weights, Outputs> pair = target.calculate(subset, predictions);
+            T newBaseModel = baseModelTrainer.train(pair.first(), subset, pair.second());
 
+            logger.debug("Optimization starting");
             CoefficientOptimizer coefficientOptimizer = target.makeOptimizer();
             double coefficient =
                     coefficientOptimizer.optimize(subset, predictions, newBaseModel);
-            logger.debug("coefficient=" + coefficient);
+            logger.debug("step=" + step + ", coefficient=" + coefficient);
 
             ensemble.addBaseModel(shrinkage * coefficient, newBaseModel);
 
-            for (int index = 0; index < dataSet.numberOfRows(); index++) {
-                predictions[index] += coefficient * shrinkage * newBaseModel.predict(dataSet.getRow(index));
-            }
+            logger.debug("Updating vector of predictions");
+            Outputs newPredictions = RankingUtils.predictAll(dataSet, newBaseModel);
+            predictions = updatePredictions(dataSet, predictions, coefficient * shrinkage, newPredictions);
+
+            logger.debug("Finished step " + step);
         }
+    }
+
+    private Outputs updatePredictions(
+            DataSet dataSet,
+            Outputs predictions,
+            double coefficient,
+            Outputs newPredictions
+    ) {
+        Map<Instance, Double> result = new HashMap<>();
+        for (Instance instance : dataSet) {
+            result.put(
+                    instance,
+                    predictions.valueOf(instance) + coefficient * newPredictions.valueOf(instance)
+            );
+        }
+        return new Outputs(result);
     }
 
     private DataSet bootstrap(DataSet dataSet) {

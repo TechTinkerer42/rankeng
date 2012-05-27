@@ -2,119 +2,139 @@ package ru.compscicenter.ranking.data;
 
 import ru.compscicenter.ranking.utils.Pair;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Author: Vasiliy Homutov - vasiliy.homutov@gmail.com
  * Date:   18.04.12
  */
-public class DataSet {
+public class DataSet implements Iterable<Instance> {
 
-    private final List<List<Integer>> queries;
-    private final double[][] features;
-    private final double[] relevance;
+    private final List<Query> queries;
+    private final int size;
+    private final int numberOfFeatures;
 
-    public DataSet(List<List<Integer>> queries, double[][] features, double[] relevance) {
-        this.features = features;
+    public DataSet(List<Query> queries, int numberOfFeatures) {
         this.queries = queries;
-        this.relevance = relevance;
+        int counter = 0;
+        for (Query query : queries) {
+            counter += query.size();
+        }
+        this.size = counter;
+        this.numberOfFeatures = numberOfFeatures;
     }
 
     public Pair<DataSet, DataSet> split(double ratio, int RANDOM_SEED) {
-        List<List<Integer>> first = new ArrayList<>();
-        List<List<Integer>> second = new ArrayList<>();
+        List<Query> first = new ArrayList<>();
+        List<Query> second = new ArrayList<>();
 
         Random random = new Random(RANDOM_SEED);
-        for (List<Integer> query : queries) {
+        for (Query query : queries) {
             if (random.nextDouble() < ratio) {
                 first.add(query);
-                second.add(Collections.<Integer>emptyList());
+                second.add(new Query(Collections.<Instance>emptyList()));
             } else {
-                first.add(Collections.<Integer>emptyList());
+                first.add(new Query(Collections.<Instance>emptyList()));
                 second.add(query);
             }
         }
-        return new Pair<>(new DataSet(first, features, relevance), new DataSet(second, features, relevance));
+
+        return new Pair<>(new DataSet(first, numberOfFeatures), new DataSet(second, numberOfFeatures));
     }
 
     public Pair<DataSet, DataSet> split(Integer splitIndex, Double splitValue) {
-        List<List<Integer>> lessOrEquals = new ArrayList<>();
-        List<List<Integer>> greater = new ArrayList<>();
+        List<Query> lessOrEquals = new ArrayList<>();
+        List<Query> greater = new ArrayList<>();
 
-        for (List<Integer> query : queries()) {
-            List<Integer> currentLOE = new ArrayList<>();
-            List<Integer> currentGreater = new ArrayList<>();
-            for (Integer doc : query) {
-                if (getRow(doc).valueAt(splitIndex) <= splitValue) {
-                    currentLOE.add(doc);
+        for (Query query : queries()) {
+            List<Instance> currentLOE = new ArrayList<>();
+            List<Instance> currentGreater = new ArrayList<>();
+            for (Instance instance : query.getInstances()) {
+                if (instance.featureValue(splitIndex) <= splitValue) {
+                    currentLOE.add(instance);
                 } else {
-                    currentGreater.add(doc);
+                    currentGreater.add(instance);
                 }
             }
-            lessOrEquals.add(currentLOE);
-            greater.add(currentGreater);
+            lessOrEquals.add(new Query(currentLOE));
+            greater.add(new Query(currentGreater));
         }
-        DataSet resultFirst = new DataSet(lessOrEquals, features, relevance);
-        DataSet resultSecond = new DataSet(greater, features, relevance);
+        DataSet resultFirst = new DataSet(lessOrEquals, numberOfFeatures);
+        DataSet resultSecond = new DataSet(greater, numberOfFeatures);
 
         return new Pair<>(resultFirst, resultSecond);
     }
 
-    public double[][] features() {
-        return features;
-    }
-
-    public double[] relevance() {
-        return relevance;
-    }
-
-    public List<FeatureRow> getRowList() {
-        List<FeatureRow> result = new ArrayList<>();
-        for (int index = 0; index < features.length; index++) {
-            result.add(new FeatureRowImpl(index));
-        }
-        return result;
-    }
-
-    public FeatureRow getRow(int rowIndex) {
-        return new FeatureRowImpl(rowIndex);
-    }
-
-    public List<List<Integer>> queries() {
+    public List<Query> queries() {
         return queries;
     }
 
-    public double relevanceAt(int rowIndex) {
-        return relevance[rowIndex];
-    }
-
     public int numberOfFeatures() {
-        return features[0].length;
+        return numberOfFeatures;
     }
 
-    public int numberOfRows() {
-        return features.length;
+    public int size() {
+        return size;
     }
 
-    private class FeatureRowImpl implements FeatureRow {
+    @Override
+    public Iterator<Instance> iterator() {
+        return new InstanceIterator();
+    }
 
-        private final int rowIndex;
+    private class InstanceIterator implements Iterator<Instance> {
 
-        private FeatureRowImpl(int rowIndex) {
-            this.rowIndex = rowIndex;
+        private boolean hasNext;
+        private Instance next;
+
+        private int queryIndex = 0;
+        private Iterator<Instance> innerIterator;
+
+        private InstanceIterator() {
+            updateIterator();
         }
 
         @Override
-        public double valueAt(int featureIndex) {
-            return features[rowIndex][featureIndex];
+        public boolean hasNext() {
+            return hasNext;
         }
 
         @Override
-        public int size() {
-            return features[rowIndex].length;
+        public Instance next() {
+            Instance result = next;
+            updateNext();
+            return result;
+        }
+
+        private void updateNext() {
+            if (innerIterator != null && innerIterator.hasNext()) {
+                next = innerIterator.next();
+                hasNext = true;
+
+                return;
+            }
+            queryIndex++;
+            updateIterator();
+        }
+
+        private void updateIterator() {
+            while (queryIndex < queries.size() && queries.get(queryIndex).isEmpty()) {
+                queryIndex++;
+            }
+            if (queryIndex == queries.size()) {
+                next = null;
+                hasNext = false;
+
+                return;
+            }
+            innerIterator = queries.get(queryIndex).getInstances().iterator();
+            next = innerIterator.next();
+            hasNext = true;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
         }
     }
 }
