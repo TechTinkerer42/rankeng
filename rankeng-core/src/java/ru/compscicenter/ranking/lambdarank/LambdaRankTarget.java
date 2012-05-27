@@ -35,7 +35,7 @@ public class LambdaRankTarget implements Target {
 
     // TODO: complicated logic - must be verified (and probably improved)
     @Override
-    public Pair<Weights, Outputs> calculatePseudoResiduals(DataSet dataSet, Outputs outputs) {
+    public Pair<Weights, Outputs> approximatePseudoResiduals(DataSet dataSet, Outputs outputs) {
         Map<Instance, Double> W = new HashMap<>();
         Map<Instance, Double> V = new HashMap<>();
         Map<Instance, Double> Val = new HashMap<>();

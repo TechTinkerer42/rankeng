@@ -51,11 +51,9 @@ public class GradientBoosting<T extends RegressionModel> implements EnsembleTrai
 
     @Override
     public Ensemble<T> train(DataSet dataSet, Outputs relevance, int stepNumber) {
-//        double[] weights = new double[dataSet.size()];
-//        Arrays.fill(weights, 1);
         logger.info("Training model (steps = " + stepNumber + ", data set size is " + dataSet.size() + ")");
 
-        Pair<Weights, Outputs> pair = target.calculatePseudoResiduals(dataSet, relevance);
+        Pair<Weights, Outputs> pair = target.approximatePseudoResiduals(dataSet, relevance);
         T baseModel = baseModelTrainer.train(pair.first(), dataSet, pair.second());
 
         Ensemble<T> result = new Ensemble<>();
@@ -76,7 +74,7 @@ public class GradientBoosting<T extends RegressionModel> implements EnsembleTrai
             DataSet subset = bootstrap(dataSet);
 
             logger.debug("Training base model (step = " + step + ")");
-            Pair<Weights, Outputs> pair = target.calculatePseudoResiduals(subset, predictions);
+            Pair<Weights, Outputs> pair = target.approximatePseudoResiduals(subset, predictions);
             T newBaseModel = baseModelTrainer.train(pair.first(), subset, pair.second());
 
             logger.debug("Optimization starting");
