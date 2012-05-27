@@ -29,10 +29,8 @@ public class Main {
     private static final String packageName = "ru.compscicenter.ranking.tools";
 
     public static void main(String[] args) throws Exception {
-        logger.debug(args[0]);
-
-        int stepNumber = Integer.parseInt(args[2]);
-        String toolName = args[1];
+        int stepNumber = Integer.parseInt(args[1]);
+        String toolName = args[0];
 
         logger.info("Loading learning data");
         DataLoader dataLoader = new IMat2009DataLoader("data/imat2009-datasets/imat2009_learning.txt");
