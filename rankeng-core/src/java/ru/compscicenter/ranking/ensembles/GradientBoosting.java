@@ -70,10 +70,10 @@ public class GradientBoosting<T extends RegressionModel> implements EnsembleTrai
         for (int step = 1; step <= numberOfIterations; step++) {
             logger.debug("Starting step " + step);
 
-            logger.debug("Bootstrapping (step" + step + ")");
+            logger.debug("Bootstrapping (step=" + step + ")");
             DataSet subset = bootstrap(dataSet);
 
-            logger.debug("Training base model (step = " + step + ")");
+            logger.debug("Training base model (step=" + step + ")");
             Pair<Weights, Outputs> pair = target.approximatePseudoResiduals(subset, predictions);
             T newBaseModel = baseModelTrainer.train(pair.first(), subset, pair.second());
 
