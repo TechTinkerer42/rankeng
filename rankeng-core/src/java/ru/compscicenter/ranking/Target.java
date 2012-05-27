@@ -11,6 +11,6 @@ import ru.compscicenter.ranking.utils.Pair;
  * Date: 5/26/12
  */
 public interface Target {
-    Pair<Weights, Outputs> calculate(DataSet dataSet, Outputs outputs);
+    Pair<Weights, Outputs> calculatePseudoResiduals(DataSet dataSet, Outputs outputs);
     CoefficientOptimizer makeOptimizer();
 }

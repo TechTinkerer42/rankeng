@@ -31,8 +31,8 @@ public class LambdaRankOptimizer implements CoefficientOptimizer {
 
     /**
      * Gradient descent
-     * TODO: нихера не понимаю, что тут делаю
      */
+    // TODO: complicated logic - must be verified (and probably improved)
     @Override
     public <T extends RegressionModel> double optimize(DataSet dataSet, Outputs outputs, T baseModel) {
         logger.info("Starting optimization (data set size is " + dataSet.size() + ")");

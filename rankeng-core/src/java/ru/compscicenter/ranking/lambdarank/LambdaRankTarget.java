@@ -33,9 +33,9 @@ public class LambdaRankTarget implements Target {
         this.pairWeights = weightCalculator.calculateWeights(dataSet, relevance);
     }
 
-    // TODO: какого хера я вообще делаю??? Надо разобраться с тем, что я приближаю!!!
+    // TODO: complicated logic - must be verified (and probably improved)
     @Override
-    public Pair<Weights, Outputs> calculate(DataSet dataSet, Outputs outputs) {
+    public Pair<Weights, Outputs> calculatePseudoResiduals(DataSet dataSet, Outputs outputs) {
         Map<Instance, Double> W = new HashMap<>();
         Map<Instance, Double> V = new HashMap<>();
         Map<Instance, Double> Val = new HashMap<>();
